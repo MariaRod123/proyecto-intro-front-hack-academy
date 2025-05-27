@@ -48,9 +48,8 @@ brandSelect.addEventListener("change", function () {
     });
 });
 
-//------------------------Agregar badge en los autos nuevos, agregar estrellas y mostrar todos los autos----------------------------
+//----------Función para agregar badge en los autos nuevos, agregar estrellas y mostrar todos los autos----------------------------
 function cargarAutos(autos) {
-  //document.querySelector("#cars").innerHTML = "";
   for (const auto of autos) {
     let autoNuevo = "";
     if (auto.status == 1) {
@@ -69,7 +68,7 @@ function cargarAutos(autos) {
       estrellas += estrellaVacia;
     }
 
-    const precio = auto.price_usd.toLocaleString("es-UY"); //Formatea el valor que trae para agregarle la sintaxis numerica del punto
+    const precio = auto.price_usd.toLocaleString("es-UY"); //Formatea el valor que trae agregándole la sintaxis numerica del punto
 
     document.querySelector("#cars").insertAdjacentHTML(
       "beforeend",
@@ -176,4 +175,32 @@ buttonFilter.addEventListener("click", function () {
         cargarAutos(autos);
       }
     });
+});
+
+//-------------------Enviar datos desde el formulario de contacto--------------
+//Validar formato de email
+function validarEmail(email){
+   let re =
+    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(String(email).toLowerCase());
+
+}
+
+const inputEmail = document.querySelector("#e-mail");
+inputEmail.addEventListener("keydown", function () {
+  const emailValido = validarEmail(inputEmail.value);
+  if (inputEmail.value === "") {
+    inputEmail.classList.remove("is-invalid");
+    inputEmail.classList.remove("is-invalid");
+  } else {
+    if (emailValido) {
+      //clases   is-valid   is-invalid
+      inputEmail.classList.remove("is-invalid");
+      inputEmail.classList.add("is-valid");
+    } else {
+      //cambio de color a rojo
+      inputEmail.classList.remove("is-valid");
+      inputEmail.classList.add("is-invalid");
+    }
+  }
 });
