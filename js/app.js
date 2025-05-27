@@ -50,7 +50,7 @@ brandSelect.addEventListener("change", function () {
 
 //------------------------Agregar badge en los autos nuevos, agregar estrellas y mostrar todos los autos----------------------------
 function cargarAutos(autos) {
-  document.querySelector("#cars").innerHTML = "";
+  //document.querySelector("#cars").innerHTML = "";
   for (const auto of autos) {
     let autoNuevo = "";
     if (auto.status == 1) {
@@ -149,6 +149,7 @@ fetch("https://ha-front-api-proyecto-final.vercel.app/cars")
 //-------------------Funcionalidad de filtrado-------------------------------------
 
 buttonFilter.addEventListener("click", function () {
+  document.querySelector("#cars").innerHTML = "";
   fetch(
     "https://ha-front-api-proyecto-final.vercel.app/cars?year=" +
       yearSelect.value +
@@ -163,7 +164,7 @@ buttonFilter.addEventListener("click", function () {
       return datosDeLaAPI.json();
     })
     .then(function (autos) {
-      document.querySelector("#cars").innerHTML = "";
+      
       if (autos.length === 0) {
         document.querySelector("#cars").insertAdjacentHTML(
           "beforeend",
