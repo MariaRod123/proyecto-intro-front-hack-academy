@@ -1,7 +1,7 @@
 const yearSelect = document.querySelector("#year-select");
 const brandSelect = document.querySelector("#brand-select");
 const modelSelect = document.querySelector("#model-select");
-const statusSelect=document.querySelector("#status-select");
+const statusSelect = document.querySelector("#status-select");
 
 const buttonFilter = document.querySelector("#button-filter");
 
@@ -31,7 +31,7 @@ fetch("https://ha-front-api-proyecto-final.vercel.app/brands")
 brandSelect.addEventListener("change", function () {
   fetch(
     "https://ha-front-api-proyecto-final.vercel.app/models?brand=" +
-    brandSelect.value
+      brandSelect.value
   )
     .then(function (datosDeLaAPI) {
       return datosDeLaAPI.json();
@@ -48,9 +48,9 @@ brandSelect.addEventListener("change", function () {
     });
 });
 
-//------------------------Agregar badge en los autos nuevos, agregar estrellas y muestra todos los autos----------------------------
+//------------------------Agregar badge en los autos nuevos, agregar estrellas y mostrar todos los autos----------------------------
 function cargarAutos(autos) {
-  document.querySelector("#cars").innerHTML=""
+  document.querySelector("#cars").innerHTML = "";
   for (const auto of autos) {
     let autoNuevo = "";
     if (auto.status == 1) {
@@ -69,8 +69,8 @@ function cargarAutos(autos) {
       estrellas += estrellaVacia;
     }
 
-    const precio=auto.price_usd.toLocaleString("es-UY")//Formatea el valor que trae para agregarle la sintaxis numerica del punto
-    
+    const precio = auto.price_usd.toLocaleString("es-UY"); //Formatea el valor que trae para agregarle la sintaxis numerica del punto
+
     document.querySelector("#cars").insertAdjacentHTML(
       "beforeend",
       `<div class="car">
@@ -136,131 +136,43 @@ function cargarAutos(autos) {
               </div>`
     );
   }
-
 }
 
 fetch("https://ha-front-api-proyecto-final.vercel.app/cars")
   .then(function (datosDeLaAPI) {
     return datosDeLaAPI.json();
   })
-  .then (function(autos){
-    cargarAutos(autos)
-  })
-    /*for (const auto of autos) {
-      //algoritmo para agregar el badge
-      let autoNuevo = "";
-      if (auto.status == 1) {
-        autoNuevo = `<span class="badge">Nuevo</span>`;
-      } else {
-        autoNuevo = "";
-      }
-      
-      //algoritmo para agregar las estrellas del rating
-      let estrellas = "";
-      let estrellaCompleta = `<i class="fas fa-star"></i>`;
-      let estrellaVacia = `<i class="far fa-star"></i>`;
-      for (let contador = 0; contador < auto.rating; contador++) {
-        estrellas += estrellaCompleta;
-      }
-      for (let contador = auto.rating; contador < 5; contador++) {
-        estrellas += estrellaVacia;
-      }
-
-      //agregar los autos que se traen de la api
-      const precio=auto.price_usd.toLocaleString("es-UY") //Formatea el valor que trae para agregarle la sintaxis numerica del punto
-
-      document.querySelector("#cars").insertAdjacentHTML(
-        "beforeend",
-        `<div class="car">
-                <div class="row">
-                  <div class="col-img col-lg-4">
-                    <div class="position-relative">
-                      <img
-                        src=${auto.image}
-                        alt="Audi Q5"
-                      />
-                      ${autoNuevo}
-                    </div>
-                  </div>
-                  <div class="col-lg-8">
-                    <div class="row">
-                      <div class="col-xl-6">
-                        <h3>${auto.brand} ${auto.model}</h3>
-                      </div>
-
-                      <div class="col-xl-6">
-                        <div class="car-info">
-                          ${auto.year} | USD ${precio} |
-                          <div class="rating">
-                          ${estrellas}
-  
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <p class="car-description">
-                     ${auto.description}
-                    </p>
-                    <div class="car-footer">
-                      <button
-                        type="button"
-                        name="button"
-                        class="btn btn-success btn-sm"
-                      >
-                        <i class="fas fa-shopping-cart"></i> Comprar
-                      </button>
-                      <button
-                        type="button"
-                        name="button"
-                        class="btn btn-outline-secondary btn-sm"
-                      >
-                        <i class="far fa-plus-square"></i> Más info<span
-                          >rmación</span
-                        >
-                      </button>
-                      <button
-                        type="button"
-                        name="button"
-                        class="btn btn-outline-secondary btn-sm"
-                      >
-                        <i class="far fa-share-square"></i> Compartir
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>`
-      );
-    }
-  });*/
+  .then(function (autos) {
+    cargarAutos(autos);
+  });
 
 //-------------------Funcionalidad de filtrado-------------------------------------
 
 buttonFilter.addEventListener("click", function () {
   fetch(
     "https://ha-front-api-proyecto-final.vercel.app/cars?year=" +
-    yearSelect.value +
-    "&brand=" +
-    brandSelect.value +
-    "&model=" +
-    modelSelect.value +
-    "&status=" +
-    statusSelect.value
+      yearSelect.value +
+      "&brand=" +
+      brandSelect.value +
+      "&model=" +
+      modelSelect.value +
+      "&status=" +
+      statusSelect.value
   )
     .then(function (datosDeLaAPI) {
       return datosDeLaAPI.json();
     })
-    .then(function(autos){
-      document.querySelector("#cars").innerHTML=""
-      if(autos.length===0){
-        document.querySelector("#cars").insertAdjacentHTML("beforeend", `<div class="alert alert-danger" role="alert">
+    .then(function (autos) {
+      document.querySelector("#cars").innerHTML = "";
+      if (autos.length === 0) {
+        document.querySelector("#cars").insertAdjacentHTML(
+          "beforeend",
+          `<div class="alert alert-danger" role="alert">
           No hay autos que mostrar!
-        </div>`)
-      }else{
-        cargarAutos(autos)
+        </div>`
+        );
+      } else {
+        cargarAutos(autos);
       }
-
-    })
-  }); 
-
-
+    });
+});
