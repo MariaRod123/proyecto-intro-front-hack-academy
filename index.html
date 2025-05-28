@@ -213,7 +213,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form>
+          <form method="post" action="https://formspree.io/f/movdgdak">
             <div class="mb-3">
               <label for="name" class="form-label">Nombre</label>
               <input type="text" name="name" value="" class="form-control" placeholder="Ingresar nombre completo..." />
@@ -227,13 +227,15 @@
               <textarea name="message" rows="8" cols="40" class="form-control"
                 placeholder="Ingresar mensaje..."></textarea>
             </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-success" data-bs-dismiss="modal">
+                Enviar
+              </button>
+            </div>
+
           </form>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-success" data-bs-dismiss="modal">
-            Enviar
-          </button>
-        </div>
+        
       </div>
     </div>
   </div>
